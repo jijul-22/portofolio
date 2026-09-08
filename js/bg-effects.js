@@ -15,6 +15,11 @@
   const ctx = canvas.getContext('2d', { alpha: true });
   if (!ctx) return;
 
+  if (window.innerWidth < 768 || (window.matchMedia && window.matchMedia('(pointer: coarse)').matches)) {
+    canvas.style.display = 'none';
+    return;
+  }
+
   let width = window.innerWidth;
   let height = window.innerHeight;
   let dpr = Math.min(window.devicePixelRatio || 1, 2);

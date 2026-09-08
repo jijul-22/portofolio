@@ -572,11 +572,12 @@
   const vpH = () => document.documentElement.clientHeight || innerHeight;
   let renderer, scene, camera, maxAniso = 1;
 
-  const HI = qs('q', COARSE ? 'low' : 'high');
-  const LOW = HI === 'low';
-  const WANT_POST = qs('post', '1') !== '0';
-  const WANT_SHADOW = qs('shadow', LOW ? '0' : '1') !== '0';
-  const DPR_CAP = qn('dpr', LOW ? 1.5 : 2.0);
+  const IS_MOBILE = (typeof window !== 'undefined') && (window.innerWidth < 768 || matchMedia('(pointer: coarse)').matches);
+  const HI = qs('q', IS_MOBILE ? 'low' : (COARSE ? 'low' : 'high'));
+  const LOW = HI === 'low' || IS_MOBILE;
+  const WANT_POST = !IS_MOBILE && qs('post', '1') !== '0';
+  const WANT_SHADOW = !IS_MOBILE && qs('shadow', LOW ? '0' : '1') !== '0';
+  const DPR_CAP = IS_MOBILE ? 1.0 : qn('dpr', LOW ? 1.25 : 2.0);
   const PERF = { scale: 1, acc: 0, n: 0, locked: qs('adapt', '1') === '0' };
 
   function initGL() {

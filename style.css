@@ -4809,9 +4809,38 @@ h1, h2, h3, h4 {
 /* ─── END MEGA VISUAL IMPACT LAYER ─── */
 
 /* ══════════════════════════════════════════════
-   MOBILE VIEWPORT REFINEMENT (<= 768px)
+   MOBILE PERFORMANCE & VIEWPORT REFINEMENT (<= 768px)
 ══════════════════════════════════════════════ */
-@media (max-width: 768px) {
+@media (max-width: 768px), (pointer: coarse) {
+  /* Disable heavy continuous background GPU shader animations on mobile */
+  body::before {
+    animation: none !important;
+    background: radial-gradient(ellipse 90% 70% at 20% 10%, rgba(37, 99, 235, 0.45) 0%, transparent 60%),
+                radial-gradient(ellipse 80% 60% at 80% 80%, rgba(99, 102, 241, 0.35) 0%, transparent 60%),
+                #02050f !important;
+  }
+
+  /* Disable blurred animated glow orbs on mobile (prevents fillrate throttling) */
+  .ambient-glows {
+    display: none !important;
+  }
+
+  .mouse-spotlight {
+    display: none !important;
+  }
+
+  /* Optimize glassmorphism for silky-smooth 60 FPS scrolling on mobile */
+  .hero-status-pill,
+  .ide-terminal,
+  .btn-secondary,
+  .btn-ghost,
+  .nav,
+  .skill-row-card,
+  .modal-panel {
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+  }
+
   .hero {
     min-height: auto;
     padding-top: calc(var(--nav-h) + 16px);
