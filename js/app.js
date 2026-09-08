@@ -286,7 +286,7 @@
   });
 
   /* ------------------------------------------------------------ 6 · Custom Magnetic Cursor */
-  if (cursorDot) {
+  if (cursorDot && !window.matchMedia('(hover: none), (pointer: coarse)').matches) {
     window.addEventListener('pointermove', e => {
       mouseX = e.clientX;
       mouseY = e.clientY;
@@ -314,6 +314,8 @@
         cursorDot.classList.remove('act');
       }
     });
+  } else if (cursorDot) {
+    cursorDot.style.display = 'none';
   }
 
   /* ------------------------------------------------------------ 7 · Intersection Reveal Observer */

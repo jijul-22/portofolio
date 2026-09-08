@@ -41,7 +41,7 @@
     'Flexbox', 'CSS Grid', 'API', 'Promise', '=>', '{ ...props }'
   ];
 
-  const PARTICLE_COUNT = window.innerWidth < 768 ? 40 : 80;
+  const PARTICLE_COUNT = window.innerWidth < 768 ? 24 : 50;
   const particles = [];
 
   class Particle {
@@ -52,17 +52,17 @@
     reset(initial = false) {
       this.x = Math.random() * width;
       this.y = initial ? Math.random() * height : height + 20;
-      this.size = Math.random() * 1.8 + 0.8;
-      this.vx = (Math.random() - 0.5) * 0.32;
-      this.vy = -(Math.random() * 0.42 + 0.14);
-      this.baseAlpha = Math.random() * 0.45 + 0.25;
+      this.size = Math.random() * 1.6 + 0.8;
+      this.vx = (Math.random() - 0.5) * 0.28;
+      this.vy = -(Math.random() * 0.38 + 0.12);
+      this.baseAlpha = Math.random() * 0.40 + 0.20;
       this.alpha = this.baseAlpha;
-      const hues = [195, 210, 225, 245, 260, 280];
+      const hues = [195, 210, 225, 245, 260];
       this.hue = hues[Math.floor(Math.random() * hues.length)];
-      this.isToken = width >= 768 && Math.random() < 0.28;
+      this.isToken = width >= 768 && Math.random() < 0.24;
       this.token = this.isToken ? CODE_TOKENS[Math.floor(Math.random() * CODE_TOKENS.length)] : null;
-      this.tokenSize = Math.floor(Math.random() * 2 + 10); // 10px - 11px
-      this.pulseSpeed = Math.random() * 0.02 + 0.008;
+      this.tokenSize = 10;
+      this.pulseSpeed = Math.random() * 0.015 + 0.008;
       this.pulseVal = Math.random() * Math.PI;
     }
 
@@ -72,15 +72,17 @@
       this.pulseVal += this.pulseSpeed;
       this.alpha = this.baseAlpha * (0.65 + 0.35 * Math.sin(this.pulseVal));
 
-      const dx = mouse.x - this.x;
-      const dy = mouse.y - this.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-
-      if (dist < mouse.radius && dist > 0) {
-        const force = (1 - dist / mouse.radius) * 1.6;
-        this.x -= (dx / dist) * force;
-        this.y -= (dy / dist) * force;
-        this.alpha = Math.min(1.0, this.alpha + force * 0.45);
+      if (mouse.active) {
+        const dx = mouse.x - this.x;
+        const dy = mouse.y - this.y;
+        if (Math.abs(dx) < mouse.radius && Math.abs(dy) < mouse.radius) {
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < mouse.radius && dist > 0) {
+            const force = (1 - dist / mouse.radius) * 1.4;
+            this.x -= (dx / dist) * force;
+            this.y -= (dy / dist) * force;
+          }
+        }
       }
 
       if (this.y < -30) this.reset();
@@ -89,21 +91,17 @@
     }
 
     draw() {
-      ctx.save();
       if (this.isToken) {
-        // Crisp, Sharp Monospace Typography
-        ctx.font = `500 ${this.tokenSize}px 'JetBrains Mono', 'Fira Code', 'Consolas', monospace`;
+        ctx.font = `500 ${this.tokenSize}px 'JetBrains Mono', monospace`;
         ctx.textBaseline = 'middle';
-        ctx.fillStyle = `hsla(${this.hue}, 92%, 80%, ${this.alpha * 0.85})`;
+        ctx.fillStyle = `hsla(${this.hue}, 90%, 80%, ${this.alpha * 0.8})`;
         ctx.fillText(this.token, this.x, this.y);
       } else {
-        // Glowing Sharp Micro Dot
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${this.hue}, 90%, 75%, ${this.alpha})`;
+        ctx.fillStyle = `hsla(${this.hue}, 88%, 75%, ${this.alpha})`;
         ctx.fill();
       }
-      ctx.restore();
     }
   }
 
@@ -114,7 +112,7 @@
   function resize() {
     width = window.innerWidth;
     height = window.innerHeight;
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     canvas.width = Math.round(width * dpr);
     canvas.height = Math.round(height * dpr);
     canvas.style.width = width + 'px';
@@ -125,44 +123,53 @@
   resize();
   window.addEventListener('resize', resize, { passive: true });
 
+  let mouseMoved = false;
   window.addEventListener('pointermove', e => {
     mouse.targetX = e.clientX;
     mouse.targetY = e.clientY;
     mouse.active = true;
-
-    document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
-    document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+    mouseMoved = true;
   }, { passive: true });
 
   function drawConnections() {
-    const maxDist = 110;
+    const maxDist = 90;
+    const maxDistSq = maxDist * maxDist;
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(147, 197, 253, 0.12)';
+    ctx.lineWidth = 0.5;
+
     for (let i = 0; i < particles.length; i++) {
+      const p1 = particles[i];
+      if (p1.isToken) continue;
       for (let j = i + 1; j < particles.length; j++) {
-        const p1 = particles[i];
         const p2 = particles[j];
-        if (p1.isToken || p2.isToken) continue;
+        if (p2.isToken) continue;
 
         const dx = p1.x - p2.x;
+        if (dx > maxDist || dx < -maxDist) continue;
         const dy = p1.y - p2.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dy > maxDist || dy < -maxDist) continue;
 
-        if (dist < maxDist) {
-          const alpha = (1 - dist / maxDist) * 0.16;
-          ctx.beginPath();
+        const distSq = dx * dx + dy * dy;
+        if (distSq < maxDistSq) {
           ctx.moveTo(p1.x, p1.y);
           ctx.lineTo(p2.x, p2.y);
-          ctx.strokeStyle = `rgba(147, 197, 253, ${alpha})`;
-          ctx.lineWidth = 0.6;
-          ctx.stroke();
         }
       }
     }
+    ctx.stroke();
   }
 
   let animId;
   function render() {
-    mouse.x += (mouse.targetX - mouse.x) * 0.08;
-    mouse.y += (mouse.targetY - mouse.y) * 0.08;
+    mouse.x += (mouse.targetX - mouse.x) * 0.1;
+    mouse.y += (mouse.targetY - mouse.y) * 0.1;
+
+    if (mouseMoved) {
+      document.documentElement.style.setProperty('--mouse-x', `${Math.round(mouse.x)}px`);
+      document.documentElement.style.setProperty('--mouse-y', `${Math.round(mouse.y)}px`);
+      mouseMoved = false;
+    }
 
     ctx.clearRect(0, 0, width, height);
     drawConnections();

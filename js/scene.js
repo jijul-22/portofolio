@@ -584,18 +584,17 @@
   const IS_MOBILE = (typeof window !== 'undefined') && (window.innerWidth < 768 || matchMedia('(pointer: coarse)').matches);
   const HI = qs('q', 'high');
   const LOW = false;
-  const WANT_POST = !IS_MOBILE && qs('post', '1') !== '0';
-  const WANT_SHADOW = !IS_MOBILE && qs('shadow', '0') !== '0';
-  // Always use high-definition retina pixel ratio (up to 2.0) - NEVER drop to blurry 1.0!
-  const DPR_CAP = Math.min(window.devicePixelRatio || 1.5, 2.0);
-  // Lock resolution scale to 1.0 so performance throttle never degrades the visual sharpness
+  const WANT_POST = !IS_MOBILE && qs('post', '0') === '1';
+  const WANT_SHADOW = false;
+  // Optimized DPR: 1.25 on mobile, 1.5 on desktop for rock-solid 60 FPS
+  const DPR_CAP = IS_MOBILE ? Math.min(window.devicePixelRatio || 1, 1.25) : Math.min(window.devicePixelRatio || 1, 1.5);
   const PERF = { scale: 1, acc: 0, n: 0, locked: true };
 
   function initGL() {
     if (!window.THREE) throw new Error('THREE.js library is required');
     renderer = new THREE.WebGLRenderer({
       canvas: canvas,
-      antialias: true,
+      antialias: !IS_MOBILE,
       alpha: true,
       powerPreference: 'high-performance'
     });
@@ -609,9 +608,9 @@
       renderer.shadowMap.enabled = true;
       renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     }
-    maxAniso = renderer.capabilities.getMaxAnisotropy();
+    maxAniso = Math.min(4, renderer.capabilities.getMaxAnisotropy());
     scene = new THREE.Scene();
-    // Ultra-light atmospheric haze so the castle (temple) and celestial moon are razor sharp and vivid!
+    // Ultra-light atmospheric haze so the castle (temple) is razor sharp and vivid
     scene.fog = new THREE.FogExp2(0x05090f, IS_MOBILE ? 0.0018 : 0.005);
     camera = new THREE.PerspectiveCamera(36, vpW() / vpH(), 0.35, 220);
     scene.add(camera);
@@ -1848,6 +1847,18 @@
     RIG.tmx = (e.clientX / vpW()) * 2 - 1;
     RIG.tmy = -((e.clientY / vpH()) * 2 - 1);
   }, { passive: true });
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      running = false;
+    } else {
+      if (!running) {
+        running = true;
+        tPrev = performance.now();
+        requestAnimationFrame(frameLoop);
+      }
+    }
+  });
 
   global.KageEngine = {
     start: startScene,

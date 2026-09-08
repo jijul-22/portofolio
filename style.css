@@ -116,9 +116,11 @@ body::before {
 .glow-orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.85;
-  animation: orb-float 16s ease-in-out infinite alternate;
+  filter: blur(40px);
+  opacity: 0.65;
+  will-change: transform;
+  transform: translateZ(0);
+  animation: orb-float 24s ease-in-out infinite alternate;
 }
 
 .glow-orb--1 {
