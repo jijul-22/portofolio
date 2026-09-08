@@ -906,28 +906,8 @@
 
   const MOON = { x: 17.9, y: 31.9, z: -72, r: 8.6 };
   function buildMoon() {
-    const disc = new THREE.Mesh(
-      new THREE.PlaneGeometry(MOON.r * 2, MOON.r * 2),
-      new THREE.MeshBasicMaterial({
-        map: tx(texMoon()),
-        color: hdr(0.70, 1.5, 3.8),
-        transparent: true, depthWrite: false, fog: false, toneMapped: false
-      })
-    );
-    disc.position.set(MOON.x, MOON.y, MOON.z);
-    disc.renderOrder = 1;
-    scene.add(disc); WORLD.moon = disc;
-
-    // Focused, luminous coronal halo — never washes out the moon's sharp circular edge
-    const halo = new THREE.Mesh(
-      new THREE.PlaneGeometry(MOON.r * 3.2, MOON.r * 3.2),
-      new THREE.MeshBasicMaterial({
-        map: tx(texGlow('rgba(96,165,250,.70)', 'rgba(37,99,235,.16)')),
-        transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, fog: false, opacity: 0.22
-      })
-    );
-    halo.position.set(MOON.x, MOON.y, MOON.z - 0.3); halo.renderOrder = 0;
-    scene.add(halo); WORLD.moonHalo = halo;
+    // Celestial moon removed per request
+    return;
   }
 
   function placeMoon() {
