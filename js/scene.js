@@ -438,46 +438,55 @@
 
   /* Celestial Lunar Orb - Styled for Developer Horizon */
   function texMoon() {
-    const S = 512, c = cvs(S, S), x = c.getContext('2d');
-    const R = S / 2 - 1, rnd = mulberry32(91);
+    const S = 1024, c = cvs(S, S), x = c.getContext('2d');
+    const R = S / 2 - 2, rnd = mulberry32(91);
     const px = (u, v) => [S / 2 + u * R, S / 2 + v * R];
 
     x.beginPath(); x.arc(S / 2, S / 2, R, 0, TAU); x.closePath();
     x.save(); x.clip();
 
-    const g = x.createRadialGradient(S * 0.46, S * 0.44, S * 0.05, S / 2, S / 2, R);
-    g.addColorStop(0, 'rgb(170,210,255)');
-    g.addColorStop(0.55, 'rgb(140,180,240)');
-    g.addColorStop(0.86, 'rgb(110,150,225)');
-    g.addColorStop(1, 'rgb(90,130,210)');
+    const g = x.createRadialGradient(S * 0.44, S * 0.40, S * 0.04, S / 2, S / 2, R);
+    g.addColorStop(0, 'rgb(210,232,255)');
+    g.addColorStop(0.35, 'rgb(175,208,252)');
+    g.addColorStop(0.70, 'rgb(135,175,235)');
+    g.addColorStop(0.92, 'rgb(95,138,215)');
+    g.addColorStop(1, 'rgb(75,115,190)');
     x.fillStyle = g; x.fillRect(0, 0, S, S);
 
-    x.globalCompositeOperation = 'overlay'; x.globalAlpha = 0.5;
-    x.drawImage(fbmCanvas(256, 256, 517, 6, 4, 1.1), 0, 0, S, S);
+    x.globalCompositeOperation = 'overlay'; x.globalAlpha = 0.42;
+    x.drawImage(fbmCanvas(512, 512, 517, 7, 4, 1.15), 0, 0, S, S);
     x.globalAlpha = 1; x.globalCompositeOperation = 'source-over';
 
     const seas = [
-      [-0.52, -0.06, 0.46, 0.8],
-      [-0.26, -0.38, 0.31, 0.92],
-      [0.13, -0.31, 0.2, 0.88],
-      [0.3, -0.08, 0.23, 0.84],
-      [0.45, 0.12, 0.15, 0.78],
-      [0.57, -0.3, 0.12, 0.95]
+      [-0.52, -0.06, 0.46, 0.85],
+      [-0.26, -0.38, 0.31, 0.94],
+      [0.13, -0.31, 0.20, 0.90],
+      [0.30, -0.08, 0.23, 0.86],
+      [0.45, 0.12, 0.15, 0.80],
+      [0.57, -0.30, 0.12, 0.96]
     ];
     const sea = cvs(S, S), sx = sea.getContext('2d');
     seas.forEach(([u, v, rad, dk]) => {
-      for (let i = 0; i < 22; i++) {
-        const a = rnd() * TAU, off = rnd() * rad * 0.66;
+      for (let i = 0; i < 32; i++) {
+        const a = rnd() * TAU, off = rnd() * rad * 0.68;
         const [bx, by] = px(u + Math.cos(a) * off, v + Math.sin(a) * off * 0.8);
-        const rr = rad * R * (0.3 + rnd() * 0.46);
-        const bg = sx.createRadialGradient(bx, by, rr * 0.2, bx, by, rr);
-        bg.addColorStop(0, `rgba(0,10,30,${(dk * 0.16).toFixed(3)})`);
+        const rr = rad * R * (0.25 + rnd() * 0.44);
+        const bg = sx.createRadialGradient(bx, by, rr * 0.15, bx, by, rr);
+        bg.addColorStop(0, `rgba(4,16,42,${(dk * 0.22).toFixed(3)})`);
+        bg.addColorStop(0.6, `rgba(4,16,42,${(dk * 0.10).toFixed(3)})`);
         bg.addColorStop(1, 'rgba(0,0,0,0)');
         sx.fillStyle = bg; sx.beginPath(); sx.arc(bx, by, rr, 0, TAU); sx.fill();
       }
     });
-    x.save(); x.filter = 'blur(9px)'; x.globalAlpha = 0.9;
+    x.save(); x.filter = 'blur(1.5px)'; x.globalAlpha = 0.95;
     x.drawImage(sea, 0, 0); x.restore();
+
+    // Sharp outer rim glow
+    const rim = x.createRadialGradient(S / 2, S / 2, R * 0.88, S / 2, S / 2, R);
+    rim.addColorStop(0, 'rgba(255,255,255,0)');
+    rim.addColorStop(0.85, 'rgba(215,238,255,0.3)');
+    rim.addColorStop(1, 'rgba(255,255,255,0.7)');
+    x.fillStyle = rim; x.beginPath(); x.arc(S / 2, S / 2, R, 0, TAU); x.fill();
 
     x.restore();
     return c;
@@ -573,26 +582,28 @@
   let renderer, scene, camera, maxAniso = 1;
 
   const IS_MOBILE = (typeof window !== 'undefined') && (window.innerWidth < 768 || matchMedia('(pointer: coarse)').matches);
-  const HI = qs('q', IS_MOBILE ? 'low' : (COARSE ? 'low' : 'high'));
-  const LOW = HI === 'low' || IS_MOBILE;
+  const HI = qs('q', 'high');
+  const LOW = false;
   const WANT_POST = !IS_MOBILE && qs('post', '1') !== '0';
-  const WANT_SHADOW = !IS_MOBILE && qs('shadow', LOW ? '0' : '1') !== '0';
-  const DPR_CAP = IS_MOBILE ? 1.0 : qn('dpr', LOW ? 1.25 : 2.0);
-  const PERF = { scale: 1, acc: 0, n: 0, locked: qs('adapt', '1') === '0' };
+  const WANT_SHADOW = !IS_MOBILE && qs('shadow', '0') !== '0';
+  // Always use high-definition retina pixel ratio (up to 2.0) - NEVER drop to blurry 1.0!
+  const DPR_CAP = Math.min(window.devicePixelRatio || 1.5, 2.0);
+  // Lock resolution scale to 1.0 so performance throttle never degrades the visual sharpness
+  const PERF = { scale: 1, acc: 0, n: 0, locked: true };
 
   function initGL() {
     if (!window.THREE) throw new Error('THREE.js library is required');
     renderer = new THREE.WebGLRenderer({
       canvas: canvas,
-      antialias: !WANT_POST,
+      antialias: true,
       alpha: true,
       powerPreference: 'high-performance'
     });
-    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, DPR_CAP));
+    renderer.setPixelRatio(DPR_CAP);
     renderer.setSize(vpW(), vpH(), true);
     renderer.outputEncoding = WANT_POST ? THREE.LinearEncoding : THREE.sRGBEncoding;
     renderer.toneMapping = WANT_POST ? THREE.NoToneMapping : THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.0;
+    renderer.toneMappingExposure = 1.1;
     renderer.setClearColor(0x000000, 0);
     if (WANT_SHADOW) {
       renderer.shadowMap.enabled = true;
@@ -600,7 +611,8 @@
     }
     maxAniso = renderer.capabilities.getMaxAnisotropy();
     scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x05090f, 0.012);
+    // Ultra-light atmospheric haze so the castle (temple) and celestial moon are razor sharp and vivid!
+    scene.fog = new THREE.FogExp2(0x05090f, IS_MOBILE ? 0.0018 : 0.005);
     camera = new THREE.PerspectiveCamera(36, vpW() / vpH(), 0.35, 220);
     scene.add(camera);
   }
@@ -610,8 +622,11 @@
     const t = new THREE.CanvasTexture(canvasEl);
     t.wrapS = t.wrapT = o.wrap || THREE.ClampToEdgeWrapping;
     if (o.repeat) t.repeat.set(o.repeat[0], o.repeat[1]);
-    t.anisotropy = Math.min(o.aniso || 8, maxAniso);
+    t.anisotropy = Math.min(o.aniso || 16, maxAniso);
     if (o.srgb !== false) t.encoding = THREE.sRGBEncoding;
+    t.minFilter = THREE.LinearMipmapLinearFilter;
+    t.magFilter = THREE.LinearFilter;
+    t.generateMipmaps = true;
     t.needsUpdate = true;
     return t;
   }
@@ -879,10 +894,10 @@
     scene.add(g); WORLD.temple = g;
 
     const spill = new THREE.Mesh(
-      new THREE.PlaneGeometry(30, 16),
+      new THREE.PlaneGeometry(24, 12),
       new THREE.MeshBasicMaterial({
-        map: tx(texGlow('rgba(96,165,250,.80)', 'rgba(37,99,235,.24)')),
-        transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, fog: false, opacity: 0.35
+        map: tx(texGlow('rgba(96,165,250,.60)', 'rgba(37,99,235,.15)')),
+        transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, fog: false, opacity: 0.10
       })
     );
     spill.position.set(0, F + 3.0, TEMPLE_Z + 5.6); spill.renderOrder = 2;
@@ -895,7 +910,7 @@
       new THREE.PlaneGeometry(MOON.r * 2, MOON.r * 2),
       new THREE.MeshBasicMaterial({
         map: tx(texMoon()),
-        color: hdr(0.64, 1.4, 3.6),
+        color: hdr(0.70, 1.5, 3.8),
         transparent: true, depthWrite: false, fog: false, toneMapped: false
       })
     );
@@ -903,11 +918,12 @@
     disc.renderOrder = 1;
     scene.add(disc); WORLD.moon = disc;
 
+    // Focused, luminous coronal halo — never washes out the moon's sharp circular edge
     const halo = new THREE.Mesh(
-      new THREE.PlaneGeometry(MOON.r * 6.4, MOON.r * 6.4),
+      new THREE.PlaneGeometry(MOON.r * 3.2, MOON.r * 3.2),
       new THREE.MeshBasicMaterial({
-        map: tx(texGlow('rgba(96,165,250,.90)', 'rgba(37,99,235,.26)')),
-        transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, fog: false, opacity: 0.44
+        map: tx(texGlow('rgba(96,165,250,.70)', 'rgba(37,99,235,.16)')),
+        transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, fog: false, opacity: 0.22
       })
     );
     halo.position.set(MOON.x, MOON.y, MOON.z - 0.3); halo.renderOrder = 0;
