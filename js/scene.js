@@ -1682,15 +1682,19 @@
 
     if (WORD.group) {
       const near = smooth(0.02, 0.92, RIG.smooth);
-      const isNarrow = (vpW() / vpH()) < 1.05;
-      const maxOp = isNarrow ? 0.22 : 1.0;
-      WORD.glyphs.forEach((g, i) => {
-        const st = clamp((WORD.reveal - i * 0.075) / 0.62, 0, 1);
-        const e = easeOut(st);
-        g.position.y = g.userData.baseY - (1 - e) * (WORD.ink.asc * 1.15);
-        g.material.opacity = e * (1 - near * 0.96) * maxOp;
-        g.visible = g.material.opacity > 0.004;
-      });
+      const isMobile = vpW() < 768;
+      if (isMobile) {
+        WORD.group.visible = false;
+      } else {
+        WORD.group.visible = true;
+        WORD.glyphs.forEach((g, i) => {
+          const st = clamp((WORD.reveal - i * 0.075) / 0.62, 0, 1);
+          const e = easeOut(st);
+          g.position.y = g.userData.baseY - (1 - e) * (WORD.ink.asc * 1.15);
+          g.material.opacity = e * (1 - near * 0.96);
+          g.visible = g.material.opacity > 0.004;
+        });
+      }
     }
 
     if (WORLD.fg) {
