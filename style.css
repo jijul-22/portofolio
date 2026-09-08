@@ -2453,8 +2453,9 @@ h1, h2, h3, h4 {
   .rail { display: none; }
   .hero-side { display: none; }
   .peek { display: none; }
-  .hero-foot { width: 100%; }
-  .chapters { grid-template-columns: repeat(2, 1fr); gap: 18px 14px; }
+  .hero-spacer { display: none !important; min-height: 0 !important; height: 0 !important; }
+  .hero-foot { width: 100%; margin-top: 18px; padding-bottom: 0; }
+  .chapters { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .foot-grid { grid-template-columns: 1fr; }
 }
 
@@ -2476,7 +2477,7 @@ h1, h2, h3, h4 {
     padding: 12px 14px;
     font-size: 10.5px;
   }
-  .chapters { grid-template-columns: 1fr; }
+  .chapters { grid-template-columns: repeat(2, 1fr); gap: 10px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -4939,10 +4940,46 @@ h1, h2, h3, h4 {
   /* 4. HERO SECTION */
   .hero {
     min-height: auto !important;
-    padding: calc(var(--nav-h) + 14px) 16px 32px 16px !important;
+    padding: calc(var(--nav-h) + 14px) 16px 16px 16px !important;
     overflow-x: hidden !important;
     width: 100% !important;
     box-sizing: border-box !important;
+  }
+
+  .hero-spacer {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .hero-foot {
+    width: 100% !important;
+    margin-top: 16px !important;
+    padding-bottom: 0 !important;
+  }
+
+  .chapters {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px 10px !important;
+    padding-top: 10px !important;
+  }
+
+  .chip {
+    padding: 8px 10px !important;
+    background: rgba(10, 18, 36, 0.55) !important;
+    border: 1px solid rgba(59, 130, 246, 0.18) !important;
+    border-radius: 8px !important;
+  }
+
+  .chip .num {
+    font-size: 20px !important;
+  }
+
+  .chip .tx b {
+    font-size: 8.5px !important;
+    letter-spacing: 0.12em !important;
   }
 
   .hero-container {
@@ -5141,5 +5178,20 @@ h1, h2, h3, h4 {
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
+  }
+
+  /* 11. ELIMINATE MASSIVE DEAD SPACE BETWEEN SECTIONS ON MOBILE */
+  .sec {
+    padding: 36px 16px !important;
+    overflow-x: clip !important;
+  }
+
+  #about {
+    padding-top: 18px !important;
+  }
+
+  .sec-head {
+    margin-bottom: 20px !important;
+    gap: 10px !important;
   }
 }
