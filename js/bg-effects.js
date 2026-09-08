@@ -54,7 +54,7 @@
       this.alpha = this.baseAlpha;
       const hues = [195, 210, 225, 245, 260, 280];
       this.hue = hues[Math.floor(Math.random() * hues.length)];
-      this.isToken = Math.random() < 0.32;
+      this.isToken = width >= 768 && Math.random() < 0.28;
       this.token = this.isToken ? CODE_TOKENS[Math.floor(Math.random() * CODE_TOKENS.length)] : null;
       this.tokenSize = Math.floor(Math.random() * 2 + 10); // 10px - 11px
       this.pulseSpeed = Math.random() * 0.02 + 0.008;

@@ -1208,9 +1208,9 @@
 
     const L = hit(-1, 0), R = hit(1, 0);
     const narrow = vpW() / vpH() < 1.05;
-    const fill = narrow ? 0.95 : 1.0;
+    const fill = narrow ? 0.85 : 1.0;
     const s = ((R.x - L.x) * fill) / WORD.ink.w;
-    const base = hit(0, narrow ? -0.18 : -0.58);
+    const base = hit(0, narrow ? -0.45 : -0.58);
     WORD.group.scale.setScalar(s);
     WORD.group.position.set(-WORD.ink.cx * s, base.y, WORD_Z);
   }
@@ -1682,11 +1682,13 @@
 
     if (WORD.group) {
       const near = smooth(0.02, 0.92, RIG.smooth);
+      const isNarrow = (vpW() / vpH()) < 1.05;
+      const maxOp = isNarrow ? 0.22 : 1.0;
       WORD.glyphs.forEach((g, i) => {
         const st = clamp((WORD.reveal - i * 0.075) / 0.62, 0, 1);
         const e = easeOut(st);
         g.position.y = g.userData.baseY - (1 - e) * (WORD.ink.asc * 1.15);
-        g.material.opacity = e * (1 - near * 0.96);
+        g.material.opacity = e * (1 - near * 0.96) * maxOp;
         g.visible = g.material.opacity > 0.004;
       });
     }

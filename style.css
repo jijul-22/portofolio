@@ -2362,8 +2362,23 @@ h1, h2, h3, h4 {
 }
 
 @media (max-width: 560px) {
-  .hero-cta-group { flex-direction: column; align-items: stretch; }
-  .btn-primary, .btn-secondary { justify-content: center; }
+  .hero-cta-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+  }
+  .hero-cta-group .btn-primary {
+    grid-column: span 2;
+    justify-content: center;
+  }
+  .hero-cta-group .btn-secondary,
+  .hero-cta-group .btn-ghost {
+    justify-content: center;
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 10.5px;
+  }
   .chapters { grid-template-columns: 1fr; }
 }
 
@@ -4062,11 +4077,20 @@ h1, h2, h3, h4 {
 
 @media (max-width: 540px) {
   .hero-cta-group {
-    flex-direction: column;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
   }
 
-  .btn-primary, .btn-secondary, .btn-ghost {
+  .hero-cta-group .btn-primary {
+    grid-column: span 2;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-cta-group .btn-secondary,
+  .hero-cta-group .btn-ghost {
     width: 100%;
     justify-content: center;
   }
@@ -4783,3 +4807,128 @@ h1, h2, h3, h4 {
 }
 
 /* ─── END MEGA VISUAL IMPACT LAYER ─── */
+
+/* ══════════════════════════════════════════════
+   MOBILE VIEWPORT REFINEMENT (<= 768px)
+══════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding-top: calc(var(--nav-h) + 16px);
+    padding-bottom: 40px;
+  }
+
+  .hero-container {
+    padding-top: 0;
+    padding-bottom: 10px;
+    gap: 28px;
+  }
+
+  .hero-status-pill {
+    padding: 6px 14px;
+    gap: 8px;
+    margin-bottom: 16px;
+    max-width: 100%;
+    box-shadow: 0 0 16px rgba(59, 130, 246, 0.12);
+  }
+
+  .status-text {
+    font-size: 9.5px;
+    letter-spacing: 0.1em;
+    white-space: normal;
+    line-height: 1.35;
+  }
+
+  .h-hero {
+    font-size: clamp(36px, 10vw, 54px) !important;
+    letter-spacing: -0.035em !important;
+    line-height: 1.05 !important;
+  }
+
+  .hero-sub {
+    font-size: 14.5px;
+    line-height: 1.65;
+    margin-top: 14px;
+    color: #b8ccf0;
+  }
+
+  .hero-cta-group {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+    margin-top: 24px !important;
+    width: 100% !important;
+  }
+
+  .hero-cta-group .btn-primary {
+    grid-column: span 2 !important;
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 13px 20px !important;
+    font-size: 11px !important;
+  }
+
+  .hero-cta-group .btn-secondary,
+  .hero-cta-group .btn-ghost {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 11px 12px !important;
+    font-size: 10px !important;
+    letter-spacing: 0.12em !important;
+  }
+
+  .hero-stack-pills {
+    margin-top: 22px;
+    gap: 6px;
+  }
+
+  .hero-stack-label {
+    width: 100%;
+    margin-bottom: 2px;
+    font-size: 9px;
+  }
+
+  .h-stack-tag {
+    font-size: 10.5px;
+    padding: 4px 9px;
+  }
+
+  /* IDE Terminal on mobile */
+  .ide-terminal {
+    margin-top: 10px;
+    border-radius: 12px;
+    background: rgba(4, 9, 22, 0.94) !important;
+    border-color: rgba(59, 130, 246, 0.3) !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(59, 130, 246, 0.15) !important;
+  }
+
+  .ide-header {
+    padding: 10px 12px;
+  }
+
+  .ide-tab {
+    padding: 5px 9px;
+    font-size: 10.5px;
+  }
+
+  .ide-code {
+    padding: 14px 14px;
+    font-size: 11.5px;
+    line-height: 1.7;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .code-line {
+    white-space: nowrap;
+  }
+
+  .ide-footer {
+    padding: 8px 12px;
+    font-size: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
+
