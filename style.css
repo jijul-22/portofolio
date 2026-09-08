@@ -21,7 +21,7 @@
   --cyan: #22d3ee;             /* vivid cyan */
   --indigo: #818cf8;           /* indigo accent */
   --violet: #a78bfa;           /* violet accent */
-  --pad: clamp(20px, 4vw, 64px);
+  --pad: clamp(16px, 4vw, 64px);
   --nav-h: 76px;
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -38,6 +38,8 @@
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body {
@@ -51,6 +53,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
 }
 
 /* Vivid animated aurora mesh background */
@@ -4844,120 +4848,173 @@ h1, h2, h3, h4 {
   .hero {
     min-height: auto;
     padding-top: calc(var(--nav-h) + 16px);
-    padding-bottom: 40px;
+    padding-bottom: 36px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
 
   .hero-container {
     padding-top: 0;
     padding-bottom: 10px;
-    gap: 28px;
+    gap: 24px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  .hero-left {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .hero-status-pill {
-    padding: 6px 14px;
+    display: inline-flex;
+    align-items: center;
     gap: 8px;
-    margin-bottom: 16px;
+    padding: 6px 12px;
+    margin-bottom: 14px;
     max-width: 100%;
+    box-sizing: border-box;
     box-shadow: 0 0 16px rgba(59, 130, 246, 0.12);
   }
 
   .status-text {
-    font-size: 9.5px;
-    letter-spacing: 0.1em;
+    font-size: 10px;
+    letter-spacing: 0.08em;
     white-space: normal;
     line-height: 1.35;
+    word-break: break-word;
   }
 
   .h-hero {
-    font-size: clamp(36px, 10vw, 54px) !important;
-    letter-spacing: -0.035em !important;
-    line-height: 1.05 !important;
+    font-size: clamp(30px, 8.5vw, 44px) !important;
+    letter-spacing: -0.03em !important;
+    line-height: 1.08 !important;
+    max-width: 100% !important;
+    overflow-wrap: break-word !important;
   }
 
   .hero-sub {
-    font-size: 14.5px;
-    line-height: 1.65;
-    margin-top: 14px;
-    color: #b8ccf0;
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    margin-top: 12px !important;
+    max-width: 100% !important;
+    overflow-wrap: break-word !important;
+    color: #b8ccf0 !important;
   }
 
   .hero-cta-group {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 10px !important;
-    margin-top: 24px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 9px !important;
+    margin-top: 20px !important;
     width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 
-  .hero-cta-group .btn-primary {
-    grid-column: span 2 !important;
-    width: 100% !important;
-    justify-content: center !important;
-    padding: 13px 20px !important;
-    font-size: 11px !important;
-  }
-
+  .hero-cta-group .btn-primary,
   .hero-cta-group .btn-secondary,
   .hero-cta-group .btn-ghost {
     width: 100% !important;
+    box-sizing: border-box !important;
     justify-content: center !important;
-    padding: 11px 12px !important;
-    font-size: 10px !important;
-    letter-spacing: 0.12em !important;
+    padding: 12px 18px !important;
+    font-size: 11px !important;
+    letter-spacing: 0.14em !important;
   }
 
   .hero-stack-pills {
-    margin-top: 22px;
-    gap: 6px;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    margin-top: 18px !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .hero-stack-label {
-    width: 100%;
-    margin-bottom: 2px;
-    font-size: 9px;
+    width: 100% !important;
+    margin-bottom: 2px !important;
+    font-size: 9.5px !important;
   }
 
   .h-stack-tag {
-    font-size: 10.5px;
-    padding: 4px 9px;
+    font-size: 10px !important;
+    padding: 4px 8px !important;
   }
 
   /* IDE Terminal on mobile */
   .ide-terminal {
-    margin-top: 10px;
-    border-radius: 12px;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin-top: 12px !important;
+    border-radius: 12px !important;
     background: rgba(4, 9, 22, 0.94) !important;
     border-color: rgba(59, 130, 246, 0.3) !important;
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(59, 130, 246, 0.15) !important;
+    overflow: hidden !important;
   }
 
   .ide-header {
-    padding: 10px 12px;
+    padding: 10px 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 6px !important;
+    overflow-x: auto !important;
+    scrollbar-width: none !important;
+  }
+
+  .ide-header::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .ide-tabs {
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    overflow-x: auto !important;
+    scrollbar-width: none !important;
   }
 
   .ide-tab {
-    padding: 5px 9px;
-    font-size: 10.5px;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    padding: 4px 8px !important;
+    font-size: 10px !important;
+  }
+
+  .ide-actions {
+    flex-shrink: 0 !important;
   }
 
   .ide-code {
-    padding: 14px 14px;
-    font-size: 11.5px;
-    line-height: 1.7;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 12px 14px !important;
+    font-size: 11px !important;
+    line-height: 1.65 !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
   }
 
   .code-line {
-    white-space: nowrap;
+    white-space: nowrap !important;
   }
 
   .ide-footer {
-    padding: 8px 12px;
-    font-size: 10px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
+    padding: 8px 12px !important;
+    font-size: 9.5px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 4px !important;
   }
 }
 
