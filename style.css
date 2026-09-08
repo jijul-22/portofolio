@@ -645,24 +645,37 @@ h1, h2, h3, h4 {
 
 .hero-container {
   display: grid;
-  grid-template-columns: 1.15fr 0.95fr;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.95fr);
   gap: clamp(32px, 5vw, 64px);
   align-items: center;
   padding-top: calc(var(--nav-h) + clamp(20px, 4vh, 48px));
   padding-bottom: 40px;
   position: relative;
   z-index: 2;
+  width: 100%;
+  max-width: var(--max-w);
+  box-sizing: border-box;
 }
 
 @media (max-width: 1024px) {
   .hero-container {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 40px;
   }
 }
 
 .hero-left {
   max-width: 680px;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.hero-right {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 /* Status Pill with Radar Beacon */
@@ -2604,10 +2617,15 @@ h1, h2, h3, h4 {
 
 .ide-body {
   display: none;
-  padding: 20px 22px;
+  padding: 18px 20px;
   font-family: 'JetBrains Mono', monospace;
   font-size: 12.5px;
   line-height: 1.85;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow-x: auto;
 }
 
 .ide-body.active {
@@ -2617,6 +2635,10 @@ h1, h2, h3, h4 {
 .ide-code {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .code-line {
@@ -2624,6 +2646,7 @@ h1, h2, h3, h4 {
   align-items: center;
   white-space: pre-wrap;
   word-break: break-word;
+  min-width: 0;
 }
 
 .line-n {
@@ -4956,9 +4979,17 @@ h1, h2, h3, h4 {
   }
 
   /* 10. IDE TERMINAL */
+  .hero-right {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
   .ide-terminal {
     width: 100% !important;
     max-width: 100% !important;
+    min-width: 0 !important;
     box-sizing: border-box !important;
     margin-top: 0 !important;
     border-radius: 10px !important;
@@ -4976,6 +5007,9 @@ h1, h2, h3, h4 {
     overflow-x: auto !important;
     scrollbar-width: none !important;
     -ms-overflow-style: none !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .ide-header::-webkit-scrollbar { display: none !important; }
@@ -4996,22 +5030,36 @@ h1, h2, h3, h4 {
     font-size: 9.5px !important;
   }
 
-  .ide-tab span { display: none !important; }
+  .ide-tab span { display: inline-block !important; }
   .ide-tab svg { display: block !important; }
   .ide-actions { flex-shrink: 0 !important; }
 
-  .ide-code {
+  .ide-body {
+    padding: 10px 12px !important;
     width: 100% !important;
     max-width: 100% !important;
+    min-width: 0 !important;
     box-sizing: border-box !important;
-    padding: 10px 12px !important;
-    font-size: 10.5px !important;
-    line-height: 1.65 !important;
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch !important;
   }
 
-  .code-line { white-space: nowrap !important; }
+  .ide-code {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+    font-size: 10px !important;
+    line-height: 1.6 !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .code-line {
+    white-space: nowrap !important;
+    min-width: 0 !important;
+  }
 
   .ide-footer {
     padding: 6px 10px !important;
@@ -5019,5 +5067,8 @@ h1, h2, h3, h4 {
     flex-direction: column !important;
     align-items: flex-start !important;
     gap: 3px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 }
