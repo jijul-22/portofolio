@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Jidan Juliana — Front-End Developer | Portfolio</title>
+  <meta name="description"
+    content="Personal portfolio of Jidan Juliana, a Front-End Developer building modern, responsive, and user-focused web interfaces with clean design, usability, and interactive digital experiences.">
+  <meta name="keywords"
+    content="Jidan Juliana, Front-End Developer, Web Developer, UI UX, JavaScript, HTML CSS, Responsive Design, Universitas Catur Insan Cendekia, Portfolio">
+  <meta name="author" content="Jidan Juliana">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Jidan Juliana — Front-End Developer">
+  <meta property="og:description"
+    content="I build modern, responsive, and user-focused web interfaces with a strong interest in clean design, usability, and interactive digital experiences.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#05070a">
+
+  <!-- Google Fonts: Onest, Space Grotesk, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Onest:wght@200;300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Scroll Progress Indicator -->
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- Ambient Aurora & Cyber Grid Background Layer -->
+  <div class="ambient-glows" aria-hidden="true">
+    <div class="glow-orb glow-orb--1"></div>
+    <div class="glow-orb glow-orb--2"></div>
+    <div class="glow-orb glow-orb--3"></div>
+    <div class="glow-orb glow-orb--4"></div>
+  </div>
+  <div class="cyber-grid" aria-hidden="true"></div>
+
+  <!-- Interactive 2D Particle & Code Constellation Canvas -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <!-- WebGL 3D Background Canvas -->
+  <canvas id="gl"></canvas>
+
+
+
+  <!-- Vignette Vignetting -->
+  <div id="vignette"></div>
+
+  <!-- Mouse Spotlight Glow -->
+  <div id="spotlight" class="mouse-spotlight" aria-hidden="true"></div>
+
+  <!-- Magnetic Custom Cursor -->
+  <div id="cursor-dot" class="cur-dot"></div>
+
+  <!-- Preloader Screen -->
+  <div id="pre">
+    <div class="pre-in">
+      <div class="pre-mark">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="4" width="40" height="40" rx="10" stroke="rgba(59,130,246,0.4)" stroke-width="2" />
+          <path d="M16 16L24 24L16 32" stroke="#60A5FA" stroke-width="2.5" stroke-linecap="round"
+            stroke-linejoin="round" />
+          <path d="M26 32H32" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round" />
+        </svg>
+      </div>
+      <div class="pre-badge">Portofolio Jidan Juliana</div>
+      <div class="pre-bar">
+        <i id="pre-fill"></i>
+      </div>
+      <div class="pre-meta">
+        <span>Initializing WebGL Experience</span>
+        <b><span id="pre-pct">0</span>%</b>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fixed Navigation Header -->
+  <header class="nav" id="nav">
+    <a href="#top" class="brand" aria-label="Jidan Juliana Home">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 8L11 12L7 16" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M13 16H17" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </div>
+      <div class="brand-tx">
+        <b>JIDAN JULIANA</b>
+        <i>Front-End Developer</i>
+      </div>
+    </a>
+
+    <nav class="nav-links" id="nav-links">
+      <a href="#top" class="nav-link on"><span>Overview</span><span class="alt">00 Top</span></a>
+      <a href="#about" class="nav-link"><span>About</span><span class="alt">01 About</span></a>
+      <a href="#experience" class="nav-link"><span>Experience</span><span class="alt">02 Exp</span></a>
+      <a href="#work" class="nav-link"><span>Projects</span><span class="alt">03 Work</span></a>
+      <a href="#skills" class="nav-link"><span>Skills</span><span class="alt">04 Stack</span></a>
+      <a href="#contact" class="nav-link"><span>Contact</span><span class="alt">05 Connect</span></a>
+    </nav>
+
+    <button class="nav-burger" id="burger" aria-label="Toggle Menu">
+      <i></i>
+      <i></i>
+    </button>
+  </header>
+
+  <!-- Navigation Vertical Rail -->
+  <div class="rail" aria-hidden="true">
+    <button data-target="top" class="on" title="Overview" aria-label="Go to Top"><i></i></button>
+    <button data-target="about" title="About Me & What I Do" aria-label="Go to About"><i></i></button>
+    <button data-target="experience" title="Practical Experience" aria-label="Go to Experience"><i></i></button>
+    <button data-target="work" title="Selected Work" aria-label="Go to Work"><i></i></button>
+    <button data-target="skills" title="Skills & Credentials" aria-label="Go to Skills"><i></i></button>
+    <button data-target="contact" title="Get in Touch" aria-label="Go to Contact"><i></i></button>
+  </div>
+
+  <!-- Main Scroll Container -->
+  <main class="page">
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="top">
+      <div class="hero-container">
+        <!-- Hero Left Column: Intro & Calls to Action -->
+        <div class="hero-left" data-rv="up">
+          <div class="hero-status-pill">
+            <span class="status-radar">
+              <span class="status-ping"></span>
+              <span class="status-dot"></span>
+            </span>
+            <span class="status-text">Available for Opportunities // Front-End Specialist</span>
+          </div>
+
+          <h1 class="display h-hero">
+            <span class="mask-line"><span>Jidan Juliana</span></span>
+          </h1>
+
+          <p class="body-lg hero-sub">
+            Crafting responsive, high-performance, and visually captivating web experiences with modern architecture,
+            interactive design systems, and WebGL aesthetics.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#work" class="btn-primary">
+              <span>Selected Work</span>
+              <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 13L13 1M13 1H4M13 1V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </a>
+            <a href="#about" class="btn-secondary">
+              <span>About Me</span>
+            </a>
+            <a href="#contact" class="btn-ghost">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+              <span>Get In Touch</span>
+            </a>
+          </div>
+
+          <!-- Quick Tech Stack Flow -->
+          <div class="hero-stack-pills">
+            <span class="hero-stack-label">CORE STACK:</span>
+            <span class="h-stack-tag">HTML5</span>
+            <span class="h-stack-tag">CSS3 / Grid</span>
+            <span class="h-stack-tag">JavaScript ES6+</span>
+            <span class="h-stack-tag">Responsive UI</span>
+            <span class="h-stack-tag">Figma</span>
+            <span class="h-stack-tag">Three.js</span>
+          </div>
+        </div>
+
+        <!-- Hero Right Column: Interactive Developer IDE Sandbox Terminal -->
+        <div class="hero-right" data-rv="up">
+          <div class="ide-terminal" id="hero-terminal">
+            <div class="ide-header">
+              <div class="ide-controls">
+                <span class="ide-dot ide-dot--close"></span>
+                <span class="ide-dot ide-dot--min"></span>
+                <span class="ide-dot ide-dot--max"></span>
+              </div>
+              <div class="ide-tabs">
+                <button class="ide-tab active" data-tab="dev">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
+                    <polyline points="16 18 22 12 16 6" />
+                    <polyline points="8 6 2 12 8 18" />
+                  </svg>
+                  <span>Developer.ts</span>
+                </button>
+                <button class="ide-tab" data-tab="style">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                  </svg>
+                  <span>Theme.css</span>
+                </button>
+                <button class="ide-tab" data-tab="stats">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2">
+                    <line x1="18" y1="20" x2="18" y2="10" />
+                    <line x1="12" y1="20" x2="12" y2="4" />
+                    <line x1="6" y1="20" x2="6" y2="14" />
+                  </svg>
+                  <span>Metrics.json</span>
+                </button>
+              </div>
+              <div class="ide-actions">
+                <span class="ide-badge">v2.6.0</span>
+              </div>
+            </div>
+
+            <!-- Tab Content: Developer.ts -->
+            <div class="ide-body ide-body--dev active">
+              <div class="ide-code">
+                <div class="code-line"><span class="line-n">1</span><span class="c-kw">interface</span> <span
+                    class="c-type">FrontEndDeveloper</span> {</div>
+                <div class="code-line"><span class="line-n">2</span> name: <span class="c-str">'Jidan Juliana'</span>;
+                </div>
+                <div class="code-line"><span class="line-n">3</span> focus: <span class="c-str">'Modern UI & Interactive
+                    Systems'</span>;</div>
+                <div class="code-line"><span class="line-n">4</span> status: <span class="c-str">'Ready for
+                    Projects'</span>;</div>
+                <div class="code-line"><span class="line-n">5</span>}</div>
+                <div class="code-line"><span class="line-n">6</span></div>
+                <div class="code-line"><span class="line-n">7</span><span class="c-kw">export const</span> <span
+                    class="c-var">jidan</span>: <span class="c-type">FrontEndDeveloper</span> = {</div>
+                <div class="code-line"><span class="line-n">8</span> role: <span class="c-str">'Front-End
+                    Developer'</span>,</div>
+                <div class="code-line"><span class="line-n">9</span> passions: [<span class="c-str">'Pixel
+                    Perfection'</span>, <span class="c-str">'Performance'</span>, <span class="c-str">'WebGL'</span>],
+                </div>
+                <div class="code-line"><span class="line-n">10</span> buildExperience: () => <span
+                    class="c-fn">renderHighFidelityUI</span>()</div>
+                <div class="code-line"><span class="line-n">11</span>};</div>
+              </div>
+            </div>
+
+            <!-- Tab Content: Theme.css -->
+            <div class="ide-body ide-body--style">
+              <div class="ide-code">
+                <div class="code-line"><span class="line-n">1</span><span class="c-sel">:root</span> {</div>
+                <div class="code-line"><span class="line-n">2</span> --accent-cyan: <span class="c-val">#22d3ee</span>;
+                </div>
+                <div class="code-line"><span class="line-n">3</span> --electric-blue: <span
+                    class="c-val">#3b82f6</span>;</div>
+                <div class="code-line"><span class="line-n">4</span> --design-fidelity: <span class="c-val">100%</span>;
+                </div>
+                <div class="code-line"><span class="line-n">5</span> --glassmorphism: <span
+                    class="c-val">blur(24px)</span>;</div>
+                <div class="code-line"><span class="line-n">6</span>}</div>
+              </div>
+            </div>
+
+            <!-- Tab Content: Metrics.json -->
+            <div class="ide-body ide-body--stats">
+              <div class="ide-code">
+                <div class="code-line"><span class="line-n">1</span>{</div>
+                <div class="code-line"><span class="line-n">2</span> <span class="c-key">"coreWebVitals"</span>: <span
+                    class="c-str">"100/100"</span>,</div>
+                <div class="code-line"><span class="line-n">3</span> <span class="c-key">"responsiveness"</span>: <span
+                    class="c-str">"Mobile-First Fluid"</span>,</div>
+                <div class="code-line"><span class="line-n">4</span> <span class="c-key">"frameRate"</span>: <span
+                    class="c-str">"60 FPS WebGL"</span>,</div>
+                <div class="code-line"><span class="line-n">5</span> <span class="c-key">"cleanArchitecture"</span>:
+                  <span class="c-val">true</span></div>
+                <div class="code-line"><span class="line-n">6</span>}</div>
+              </div>
+            </div>
+
+            <!-- Terminal Output Bar -->
+            <div class="ide-footer">
+              <div class="ide-foot-status">
+                <span class="dot-success"></span>
+                <span>Compiled successfully in 14ms</span>
+              </div>
+              <div class="ide-foot-tag mono">⚡ ZERO RUNTIME ERRORS</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero 3D Spatial Side Watermark -->
+      <div class="hero-side">
+        <span class="v mono">DEV // 2026</span>
+        <span class="eyebrow-muted" style="margin-top: 8px;">Front-End Focus</span>
+      </div>
+
+      <!-- Floating Live Preview Teaser Card -->
+      <a href="#work" class="peek" id="hero-peek" title="Click to view featured projects">
+        <div class="peek-fr">
+          <div class="peek-play">
+            <svg viewBox="0 0 44 44" fill="none">
+              <circle cx="22" cy="22" r="20" stroke="rgba(96,165,250,0.5)" stroke-width="1.5"
+                fill="rgba(5,10,20,0.6)" />
+              <path d="M18 15L28 22L18 29V15Z" fill="#60A5FA" />
+            </svg>
+          </div>
+        </div>
+        <div class="peek-cap">
+          <b>Featured Work</b>
+          <i>4 Systems Built</i>
+        </div>
+      </a>
+
+      <div class="hero-spacer"></div>
+
+      <!-- Hero Footer Chapter Navigator -->
+      <div class="hero-foot" data-rv="fade">
+        <div class="hero-cue">
+          <div class="track"><i></i></div>
+          <span>Chapter Index // Navigate</span>
+        </div>
+        <div class="chapters">
+          <div class="chip on" data-target="about">
+            <span class="num mono">01</span>
+            <span class="tx"><b>About & Focus</b></span>
+          </div>
+          <div class="chip" data-target="experience">
+            <span class="num mono">02</span>
+            <span class="tx"><b>Experience</b></span>
+          </div>
+          <div class="chip" data-target="work">
+            <span class="num mono">03</span>
+            <span class="tx"><b>Selected Work</b></span>
+          </div>
+          <div class="chip" data-target="skills">
+            <span class="num mono">04</span>
+            <span class="tx"><b>Skills & Stack</b></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 01: ABOUT ME & WHAT I DO -->
+    <section class="sec" id="about">
+      <div class="sec-head" data-rv="up">
+        <span class="k mono">01 // <b>PROFILE</b></span>
+        <span class="rule"></span>
+        <span class="tag">Front-End Developer & Information Systems</span>
+      </div>
+
+      <div class="about-grid about-grid--photo">
+        <!-- Profile Photo Column -->
+        <div class="about-photo-col" data-rv="up">
+          <div class="about-photo-frame">
+            <div class="about-photo-beam" aria-hidden="true"></div>
+            <div class="about-photo-glow"></div>
+            <div class="about-photo-border">
+              <img src="assets/jidan.jpg" alt="Jidan Juliana — Front-End Developer" class="about-photo-img" />
+              <div class="about-photo-overlay" aria-hidden="true"></div>
+            </div>
+            <div class="about-photo-badge">
+              <span class="status-radar">
+                <span class="status-ping"></span>
+                <span class="status-dot"></span>
+              </span>
+              <span>Available for Work</span>
+            </div>
+            <div class="about-photo-tag mono">
+              <span class="hud-label">DEV_ID //</span> JJ-2026-FE
+            </div>
+          </div>
+        </div>
+
+        <!-- Text Column -->
+        <div class="about-text-col">
+          <div class="about-title" data-rv="up">
+            <div class="eyebrow"><span class="dot"></span> About Jidan Juliana</div>
+            <h2 class="display h-sec" style="margin-top: 14px;">
+              Crafting Responsive, User-Centered Interfaces
+            </h2>
+          </div>
+
+          <div class="about-copy" data-rv="up">
+            <p class="lead">
+              I'm Jidan Juliana, a Front-End Developer with a background in Information Systems. I enjoy turning designs
+              and ideas into responsive, interactive, and user-friendly web interfaces.
+            </p>
+            <p class="body">
+              My main focus is front-end development, particularly building interfaces that are visually clean,
+              responsive, and comfortable to use. Alongside front-end projects, I have also developed several real-world
+              web applications, giving me practical experience with application architecture, databases, and backend
+              technologies.
+            </p>
+          </div>
+
+          <!-- Front-End Capabilities Skill Bars -->
+          <div class="about-skill-bars" data-rv="up">
+            <div class="skill-bar-item">
+              <div class="skill-bar-head">
+                <span>UI Engineering & Responsive Design</span>
+                <span class="mono">95%</span>
+              </div>
+              <div class="skill-bar-track"><i style="width: 95%;"></i></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-head">
+                <span>JavaScript ES6+ & DOM Architecture</span>
+                <span class="mono">90%</span>
+              </div>
+              <div class="skill-bar-track"><i style="width: 90%;"></i></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-head">
+                <span>WebGL & Interactive Experiences</span>
+                <span class="mono">85%</span>
+              </div>
+              <div class="skill-bar-track"><i style="width: 85%;"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key Quantitative Stats -->
+      <div class="about-stats" data-rv="up">
+        <div>
+          <b class="mono">04+</b>
+          <span>Projects Built</span>
+          <i>Web & UI Systems</i>
+        </div>
+        <div>
+          <b class="mono">100%</b>
+          <span>Responsive Layouts</span>
+          <i>Mobile-First Systems</i>
+        </div>
+        <div>
+          <b class="mono">02</b>
+          <span>Certifications</span>
+          <i>Dicoding Indonesia</i>
+        </div>
+        <div>
+          <b class="mono">∞</b>
+          <span>Design Fidelity</span>
+          <i>Clean & Intuitive</i>
+        </div>
+      </div>
+
+      <!-- What I Do Pillars -->
+      <div class="pillars-title" data-rv="up">
+        <div class="eyebrow"><span class="dot"></span> Core Competencies</div>
+        <h3 class="display h-sec" style="font-size: clamp(22px, 2.5vw, 36px); margin-top: 12px;">What I Do</h3>
+      </div>
+
+      <div class="pillars-grid" data-rv="up">
+        <!-- Pillar 1: Front-End Development -->
+        <div class="pillar-card">
+          <div class="pillar-top">
+            <span class="pillar-num mono">01</span>
+            <span class="pillar-tag">Core Focus</span>
+          </div>
+          <h3>Front-End Development</h3>
+          <p>Building responsive and interactive web interfaces using modern web technologies with attention to
+            usability, structure, and visual consistency.</p>
+        </div>
+
+        <!-- Pillar 2: UI Implementation -->
+        <div class="pillar-card">
+          <div class="pillar-top">
+            <span class="pillar-num mono">02</span>
+            <span class="pillar-tag">Design to Code</span>
+          </div>
+          <h3>UI Implementation</h3>
+          <p>Translating designs and concepts into functional interfaces while maintaining responsive layouts and
+            consistent user experiences.</p>
+        </div>
+
+        <!-- Pillar 3: Web Applications -->
+        <div class="pillar-card">
+          <div class="pillar-top">
+            <span class="pillar-num mono">03</span>
+            <span class="pillar-tag">Full Systems</span>
+          </div>
+          <h3>Web Applications</h3>
+          <p>Developing practical web applications and information systems when a project requires more than a front-end
+            interface, ensuring solid data workflows.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 02: EXPERIENCE -->
+    <section class="sec" id="experience">
+      <div class="sec-head" data-rv="up" data-num="02">
+        <span class="k mono">02 // <b>EXPERIENCE</b></span>
+        <span class="rule"></span>
+        <span class="tag">Real-World Application Development</span>
+      </div>
+
+      <div class="about-title" data-rv="up" style="margin-bottom: 36px;">
+        <div class="eyebrow"><span class="dot"></span> Practical Experience</div>
+        <h2 class="display h-sec" style="margin-top: 12px;">
+          Applied Development & Systems
+        </h2>
+      </div>
+
+      <div class="exp-timeline" data-rv="up">
+        <div class="exp-item">
+          <div class="exp-meta">
+            <div class="exp-company">BBWS Cimanuk Cisanggarung</div>
+            <span class="exp-badge">Web Development Internship</span>
+          </div>
+          <div class="exp-role mono">Full Stack Developer</div>
+          <p class="exp-desc">
+            During my internship at BBWS Cimanuk Cisanggarung, I worked on several web-based projects, including an
+            e-archive application and a personnel website. My responsibilities included interface development, UI/UX
+            implementation, system development, and database integration.
+          </p>
+          <div class="focus-tags">
+            <span class="focus-tag">Front-End Development</span>
+            <span class="focus-tag">Back-End Development</span>
+            <span class="focus-tag">Website Development</span>
+            <span class="focus-tag">UI/UX Implementation</span>
+            <span class="focus-tag">E-Archive Application</span>
+            <span class="focus-tag">Database Integration</span>
+            <span class="focus-tag">Web Application Development</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 03: SELECTED WORK -->
+    <section class="sec" id="work">
+      <div class="sec-head" data-rv="up" data-num="03">
+        <span class="k mono">03 // <b>WORK</b></span>
+        <span class="rule"></span>
+        <span class="tag">Curated Project Showcase</span>
+      </div>
+
+      <div class="work-head" data-rv="up">
+        <div>
+          <div class="eyebrow"><span class="dot"></span> Featured Projects</div>
+          <h2 class="display h-sec" style="margin-top: 12px;">
+            Selected Systems & Interfaces
+          </h2>
+        </div>
+        <p class="body" style="margin: 0;">
+          A collection of web applications and front-end implementations combining structured interface design,
+          responsive layouts, and interactive workflows.
+        </p>
+      </div>
+
+      <div class="cards" data-rv="up">
+        <!-- Project 01: E-Arsip BBWS Cimanuk Cisanggarung -->
+        <article class="card" data-project-id="e-arsip">
+          <div class="card-fr">
+            <div class="card-visual card-visual-arch">
+              <!-- Real UI Browser Mockup: E-Arsip Enterprise Dashboard -->
+              <div class="mockup-window">
+                <div class="mockup-bar">
+                  <div class="mockup-dots">
+                    <span class="m-dot red"></span>
+                    <span class="m-dot yellow"></span>
+                    <span class="m-dot green"></span>
+                  </div>
+                  <div class="mockup-url">https://e-arsip.bbws-cimanuk.go.id</div>
+                </div>
+                <div class="mockup-dash">
+                  <div class="dash-sidebar">
+                    <div class="dash-sb-logo"></div>
+                    <div class="dash-sb-item active"></div>
+                    <div class="dash-sb-item"></div>
+                    <div class="dash-sb-item"></div>
+                  </div>
+                  <div class="dash-main">
+                    <div class="dash-stats-row">
+                      <div class="dash-pill-stat">
+                        <span class="dash-stat-num">1,248</span>
+                        <span class="dash-stat-lbl">Arsip Aktif</span>
+                      </div>
+                      <div class="dash-pill-stat">
+                        <span class="dash-stat-num">342</span>
+                        <span class="dash-stat-lbl">Peminjaman</span>
+                      </div>
+                    </div>
+                    <div class="dash-table">
+                      <div class="dash-tr th">
+                        <span>Kode Arsip</span>
+                        <span>Judul Berkas</span>
+                        <span>Status</span>
+                      </div>
+                      <div class="dash-tr">
+                        <span class="mono">SK-2024-08</span>
+                        <span>Surat Keputusan Balai</span>
+                        <span class="badge-vital">Vital</span>
+                      </div>
+                      <div class="dash-tr">
+                        <span class="mono">BA-109/BBWS</span>
+                        <span>Berita Acara Lapangan</span>
+                        <span class="badge-active">Aktif</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-ar">
+              <svg viewBox="0 0 12 12" fill="none">
+                <path d="M1 11L11 1M11 1H3M11 1V9" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+          </div>
+          <div class="card-info">
+            <div class="card-top-meta">
+              <span class="card-cat">Web Application • Enterprise</span>
+              <span class="card-num mono">01</span>
+            </div>
+            <h3 class="card-title">E-Arsip BBWS Cimanuk Cisanggarung</h3>
+            <p class="card-desc">
+              A web-based archive management application developed to organize archive data, archive locations,
+              electronic documents, and borrowing processes.
+            </p>
+            <div class="card-tags">
+              <span class="card-tag">HTML</span>
+              <span class="card-tag">CSS</span>
+              <span class="card-tag">JavaScript</span>
+              <span class="card-tag">PHP</span>
+              <span class="card-tag">Laravel</span>
+              <span class="card-tag">MySQL</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 02: Raden Madura Distro -->
+        <article class="card" data-project-id="raden-madura">
+          <div class="card-fr">
+            <div class="card-visual card-visual-ecom">
+              <!-- Real UI Browser Mockup: E-Commerce Storefront -->
+              <div class="mockup-window">
+                <div class="mockup-bar">
+                  <div class="mockup-dots">
+                    <span class="m-dot red"></span>
+                    <span class="m-dot yellow"></span>
+                    <span class="m-dot green"></span>
+                  </div>
+                  <div class="mockup-url">https://radenmadura-distro.com</div>
+                </div>
+                <div class="mockup-ecom">
+                  <div class="ecom-nav">
+                    <span class="ecom-logo">RADEN MADURA</span>
+                    <span class="ecom-cart">🛍️ Cart (3)</span>
+                  </div>
+                  <div class="ecom-grid">
+                    <div class="ecom-card">
+                      <div class="ecom-img-box">
+                        <span class="ecom-badge">30% OFF</span>
+                      </div>
+                      <div class="ecom-txt">
+                        <b>Distro Oversized Tee</b>
+                        <span class="ecom-price">Rp 145.000</span>
+                      </div>
+                    </div>
+                    <div class="ecom-card">
+                      <div class="ecom-img-box ecom-img-box--2">
+                        <span class="ecom-badge">NEW</span>
+                      </div>
+                      <div class="ecom-txt">
+                        <b>Heavyweight Hoodie</b>
+                        <span class="ecom-price">Rp 280.000</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-ar">
+              <svg viewBox="0 0 12 12" fill="none">
+                <path d="M1 11L11 1M11 1H3M11 1V9" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+          </div>
+          <div class="card-info">
+            <div class="card-top-meta">
+              <span class="card-cat">E-Commerce • UMKM Website</span>
+              <span class="card-num mono">02</span>
+            </div>
+            <h3 class="card-title">Raden Madura Distro</h3>
+            <p class="card-desc">
+              A web-based clothing sales application developed for Raden Madura Distro, focusing on presenting products
+              and supporting online purchasing.
+            </p>
+            <div class="card-tags">
+              <span class="card-tag">HTML</span>
+              <span class="card-tag">CSS</span>
+              <span class="card-tag">JavaScript</span>
+              <span class="card-tag">PHP</span>
+              <span class="card-tag">MySQL</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 03: Cashier Application -->
+        <article class="card" data-project-id="cashier-app">
+          <div class="card-fr">
+            <div class="card-visual card-visual-pos">
+              <!-- Real UI Browser Mockup: Point of Sale Terminal -->
+              <div class="mockup-window">
+                <div class="mockup-bar">
+                  <div class="mockup-dots">
+                    <span class="m-dot red"></span>
+                    <span class="m-dot yellow"></span>
+                    <span class="m-dot green"></span>
+                  </div>
+                  <div class="mockup-url">pos://terminal-01.local</div>
+                </div>
+                <div class="mockup-pos">
+                  <div class="pos-scan-line"></div>
+                  <div class="pos-left">
+                    <div class="pos-tabs">
+                      <span class="pos-tab on">Food & Drink</span>
+                      <span class="pos-tab">Merch</span>
+                    </div>
+                    <div class="pos-items-grid">
+                      <div class="pos-item">
+                        <span>Espresso</span>
+                        <b>Rp 22k</b>
+                      </div>
+                      <div class="pos-item">
+                        <span>Matcha</span>
+                        <b>Rp 28k</b>
+                      </div>
+                      <div class="pos-item">
+                        <span>Croissant</span>
+                        <b>Rp 25k</b>
+                      </div>
+                      <div class="pos-item">
+                        <span>Bagel</span>
+                        <b>Rp 20k</b>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="pos-receipt">
+                    <div class="receipt-head">ORDER #402</div>
+                    <div class="receipt-row"><span>2x Espresso</span><b>44.000</b></div>
+                    <div class="receipt-row"><span>1x Matcha</span><b>28.000</b></div>
+                    <div class="receipt-total">
+                      <span>TOTAL</span>
+                      <b>Rp 72.000</b>
+                    </div>
+                    <div class="pos-pay-btn">PAY NOW (F12)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-ar">
+              <svg viewBox="0 0 12 12" fill="none">
+                <path d="M1 11L11 1M11 1H3M11 1V9" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+          </div>
+          <div class="card-info">
+            <div class="card-top-meta">
+              <span class="card-cat">Point of Sale • Business Tool</span>
+              <span class="card-num mono">03</span>
+            </div>
+            <h3 class="card-title">Cashier Application</h3>
+            <p class="card-desc">
+              A web-based cashier application developed to support product management and transaction processes with a
+              streamlined checkout interface.
+            </p>
+            <div class="card-tags">
+              <span class="card-tag">HTML</span>
+              <span class="card-tag">CSS</span>
+              <span class="card-tag">JavaScript</span>
+              <span class="card-tag">PHP</span>
+              <span class="card-tag">MySQL</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 04: Front-End Projects & UI Experiments -->
+        <article class="card" data-project-id="frontend-projects">
+          <div class="card-fr">
+            <div class="card-visual card-visual-ui">
+              <!-- Real UI Browser Mockup: UI Component Sandbox -->
+              <div class="mockup-window">
+                <div class="mockup-bar">
+                  <div class="mockup-dots">
+                    <span class="m-dot red"></span>
+                    <span class="m-dot yellow"></span>
+                    <span class="m-dot green"></span>
+                  </div>
+                  <div class="mockup-url">https://ui-lab.jidan.dev/components</div>
+                </div>
+                <div class="mockup-sandbox">
+                  <div class="sb-header">
+                    <span>DESIGN SYSTEM v3</span>
+                    <div class="sb-switch on"><i></i></div>
+                  </div>
+                  <div class="sb-components">
+                    <div class="sb-ctrl-row">
+                      <div class="sb-btn-primary">Button.Active</div>
+                      <div class="sb-slider"><i></i></div>
+                    </div>
+                    <div class="sb-tags-row">
+                      <span class="sb-tag-glow">Glassmorphism</span>
+                      <span class="sb-tag-cyan">WebGL 3D</span>
+                      <span class="sb-tag-purple">CSS Grid</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-ar">
+              <svg viewBox="0 0 12 12" fill="none">
+                <path d="M1 11L11 1M11 1H3M11 1V9" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+          </div>
+          <div class="card-info">
+            <div class="card-top-meta">
+              <span class="card-cat">Front-End Focus • UI Engineering</span>
+              <span class="card-num mono">04</span>
+            </div>
+            <h3 class="card-title">Front-End Projects & UI Experiments</h3>
+            <p class="card-desc">
+              A collection of front-end projects focused on responsive layouts, interface design, interaction, and
+              translating visual concepts into functional websites.
+            </p>
+            <div class="card-tags">
+              <span class="card-tag">HTML5</span>
+              <span class="card-tag">CSS3</span>
+              <span class="card-tag">JavaScript</span>
+              <span class="card-tag">Figma</span>
+              <span class="card-tag">DOM Manipulation</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CHAPTER 04: SKILLS & CREDENTIALS -->
+    <section class="sec" id="skills">
+      <div class="sec-head" data-rv="up">
+        <span class="k mono">04 // <b>SKILLS & CREDENTIALS</b></span>
+        <span class="rule"></span>
+        <span class="tag">Front-End Matrix & Academic Foundation</span>
+      </div>
+
+      <div class="about-title" data-rv="up" style="margin-bottom: 36px;">
+        <div class="eyebrow"><span class="dot"></span> Technical Capabilities</div>
+        <h2 class="display h-sec" style="margin-top: 12px;">
+          Skills & Structured Knowledge
+        </h2>
+      </div>
+
+      <!-- Skills Matrix 2x2 Grid -->
+      <div class="skills-grid" data-rv="up">
+        <!-- Primary Front-End Skills -->
+        <div class="skill-category">
+          <div class="skill-cat-head">
+            <h3>Front-End Development</h3>
+            <span class="skill-cat-badge">Primary Focus</span>
+          </div>
+          <div class="skill-list">
+            <div class="skill-row">
+              <span class="skill-name">HTML5</span>
+              <span class="skill-detail mono">Semantic Markup & Accessibility</span>
+            </div>
+            <div class="skill-row">
+              <span class="skill-name">CSS3</span>
+              <span class="skill-detail mono">Flexbox, Grid, Animations</span>
+            </div>
+            <div class="skill-row">
+              <span class="skill-name">JavaScript</span>
+              <span class="skill-detail mono">ES6+, DOM Manipulation, Async</span>
+            </div>
+            <div class="skill-row">
+              <span class="skill-name">Responsive Web Design</span>
+              <span class="skill-detail mono">Mobile-First, Adaptive Systems</span>
+            </div>
+            <div class="skill-row">
+              <span class="skill-name">DOM Manipulation</span>
+              <span class="skill-detail mono">Dynamic State & Event Handling</span>
+            </div>
+            <div class="skill-row">
+              <span class="skill-name">UI Implementation</span>
+              <span class="skill-detail mono">Design Fidelity & Interactions</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- UI / UX & Design Skills -->
+        <div class="skill-category">
+          <div class="skill-cat-head">
+            <h3>UI / UX & Design</h3>
+            <span class="skill-cat-badge">Interface Focus</span>
+          </div>
+          <div class="skill-list">
+            <div class="skill-row">
+              <span class="skill-name">Figma</span>
+              <span class="skill-detail mono">UI Prototyping & Components</span>
+            </div>
+            <div class="skill-row">
+              <span class="skill-name">Wireframing</span>
+              <span class="skill-detail mono">Information Architecture</span>
+            </div>
+            <div class="skill-row">
+              <span class="skill-name">Prototyping</span>
+              <span class="skill-detail mono">Interactive Flow Validation</span>
+            </div>
+            <div class="skill-row">
+              <span class="skill-name">Interface Design</span>
+              <span class="skill-detail mono">Visual Hierarchy & Spacing</span>
+            </div>
+            <div class="skill-row">
+              <span class="skill-name">User Experience</span>
+              <span class="skill-detail mono">Usability & Accessibility Focus</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Supporting Web Technologies -->
+        <div class="skill-category">
+          <div class="skill-cat-head">
+            <h3>Supporting Web Technologies</h3>
+            <span class="skill-cat-badge" style="color: var(--muted); border-color: var(--line);">Supporting</span>
+          </div>
+          <div class="skill-list">
+            <div class="skill-row">
+              <span class="skill-name">PHP</span>
+              <span class="skill-detail mono">Server-side Script Execution</span>
+            </div>
+            <div class="skill-row">
+              <span class="skill-name">Laravel</span>
+              <span class="skill-detail mono">MVC Architecture & Routing</span>
+            </div>
+            <div class="skill-row">
+              <span class="skill-name">MySQL</span>
+              <span class="skill-detail mono">Relational Database & Queries</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Development Tools & Workflow -->
+        <div class="skill-category">
+          <div class="skill-cat-head">
+            <h3>Tools & Workflow</h3>
+            <span class="skill-cat-badge">Workflow</span>
+          </div>
+          <div class="skill-list">
+            <div class="skill-row">
+              <span class="skill-name">Visual Studio Code</span>
+              <span class="skill-detail mono">Primary Development Environment</span>
+            </div>
+            <div class="skill-row">
+              <span class="skill-name">Git</span>
+              <span class="skill-detail mono">Version Control & Branching</span>
+            </div>
+            <div class="skill-row">
+              <span class="skill-name">GitHub</span>
+              <span class="skill-detail mono">Repository Management & CI</span>
+            </div>
+            <div class="skill-row">
+              <span class="skill-name">Laragon</span>
+              <span class="skill-detail mono">Local Development Server</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tech Stack Priority Band -->
+      <div class="tech-stack-band" data-rv="up">
+        <h4>Front-End Priority Stack Flow</h4>
+        <div class="tech-flow">
+          <span class="tech-pill primary">HTML5</span>
+          <span class="tech-arrow">→</span>
+          <span class="tech-pill primary">CSS3</span>
+          <span class="tech-arrow">→</span>
+          <span class="tech-pill primary">JavaScript (ES6+)</span>
+          <span class="tech-arrow">→</span>
+          <span class="tech-pill primary">Responsive Design</span>
+          <span class="tech-arrow">→</span>
+          <span class="tech-pill">Figma UI/UX</span>
+          <span class="tech-arrow">+</span>
+          <span class="tech-pill">PHP / Laravel / MySQL (Supporting)</span>
+        </div>
+      </div>
+
+      <!-- Credentials & Education Grid -->
+      <div class="cred-section" id="credentials" data-rv="up">
+        <!-- Certifications -->
+        <div class="cred-card">
+          <div class="eyebrow"><span class="dot"></span> Verified Learning</div>
+          <h3 class="display" style="margin-top: 10px;">Certifications</h3>
+          <div class="cred-list">
+            <div class="cred-item">
+              <div class="cred-title">Front-End Web Developer</div>
+              <div class="cred-issuer mono">Dicoding Indonesia</div>
+              <div class="cred-desc">
+                Comprehensive certification covering HTML5, CSS3, responsive web layouts, flexbox, grid, and
+                accessibility standards.
+              </div>
+            </div>
+            <div class="cred-item">
+              <div class="cred-title">JavaScript Programming</div>
+              <div class="cred-issuer mono">Dicoding Indonesia</div>
+              <div class="cred-desc">
+                In-depth validation of core JavaScript programming, ES6+ features, functional paradigm, object-oriented
+                concepts, and DOM interactions.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Academic Background -->
+        <div class="cred-card">
+          <div class="eyebrow"><span class="dot"></span> Academic Foundation</div>
+          <h3 class="display" style="margin-top: 10px;">Education</h3>
+          <div class="cred-list">
+            <div class="cred-item">
+              <div class="cred-title">Universitas Catur Insan Cendekia</div>
+              <div class="cred-issuer mono">Information Systems</div>
+              <div class="cred-desc">
+                Academic foundation in information systems architecture, database management, software modeling, and
+                business system analysis, serving as strong analytical backing for front-end engineering.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 05: CONTACT -->
+    <section class="sec fin" id="contact">
+      <div class="eyebrow" data-rv="up"><span class="dot"></span> Get In Touch</div>
+      <h2 class="display" data-rv="up">
+        Let's Build Something
+      </h2>
+      <p class="body-lg" data-rv="up">
+        Have a project, collaboration, or opportunity in mind? I'd love to hear about it.
+      </p>
+
+      <div class="contact-options" data-rv="up">
+        <a href="mailto:jidanjuliana42@gmail.com" class="contact-chip" title="Email Jidan Juliana">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+            <polyline points="22,6 12,13 2,6" />
+          </svg>
+          jidanjuliana42@gmail.com
+        </a>
+        <a href="https://github.com/jijul-22" target="_blank" rel="noopener noreferrer" class="contact-chip"
+          title="GitHub Profile">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+          </svg>
+          GitHub Profile
+        </a>
+        <a href="https://wa.me/6285794282319" target="_blank" rel="noopener noreferrer" class="contact-chip"
+          title="WhatsApp Chat">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+          </svg>
+          WhatsApp
+        </a>
+        <a href="https://instagram.com/jidanjg" target="_blank" rel="noopener noreferrer" class="contact-chip"
+          title="Instagram Profile">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+          </svg>
+          Instagram
+        </a>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="foot" id="footer">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <div class="brand">
+            <div class="brand-icon">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M7 8L11 12L7 16" stroke="#60A5FA" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+                <path d="M13 16H17" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" />
+              </svg>
+            </div>
+            <div class="brand-tx">
+              <b>JIDAN JULIANA</b>
+              <i>Front-End Developer</i>
+            </div>
+          </div>
+          <p>
+            Dedicated to building modern, responsive, and intuitive web experiences with clean code and high design
+            fidelity.
+          </p>
+        </div>
+
+        <div>
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="#top">Overview</a></li>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#work">Selected Work</a></li>
+            <li><a href="#skills">Skills & Stack</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Specialization</h4>
+          <ul>
+            <li><a href="#about">Front-End Development</a></li>
+            <li><a href="#about">Responsive Layouts</a></li>
+            <li><a href="#about">UI/UX Implementation</a></li>
+            <li><a href="#experience">Web Applications</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Education & Matrix</h4>
+          <ul>
+            <li><a href="#credentials">Universitas CIC</a></li>
+            <li><a href="#credentials">Information Systems</a></li>
+            <li><a href="#credentials">Dicoding Front-End</a></li>
+            <li><a href="#credentials">Dicoding JavaScript</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="foot-base mono">
+        <div>© 2026 JIDAN JULIANA. ALL RIGHTS RESERVED.</div>
+        <div>CINEMATIC WEBGL ARCHITECTURE // POWERED BY THREE.JS</div>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- Interactive Project Modal Backdrop & Panel -->
+  <div class="modal-backdrop" id="project-modal" role="dialog" aria-modal="true" aria-label="Project Details">
+    <div class="modal-panel">
+      <button class="modal-close" id="modal-close" aria-label="Close modal">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M1 1L13 13M1 13L13 1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+        </svg>
+      </button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <!-- Scripts Loading -->
+  <script src="js/three.min.js"></script>
+  <script src="js/portfolio-data.js"></script>
+  <script src="js/scene.js"></script>
+  <script src="js/bg-effects.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>

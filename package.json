@@ -1,0 +1,19 @@
+{
+  "name": "jidan-juliana-portfolio",
+  "version": "1.0.0",
+  "description": "Cinematic 3D Personal Portfolio for Jidan Juliana - Front-End Developer",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx -y serve . -p 3000",
+    "start": "npx -y serve . -p 3000"
+  },
+  "keywords": [
+    "portfolio",
+    "threejs",
+    "frontend-developer",
+    "webgl",
+    "shaders"
+  ],
+  "author": "Jidan Juliana",
+  "license": "MIT"
+}
