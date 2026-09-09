@@ -2973,6 +2973,7 @@ h1, h2, h3, h4 {
   display: flex;
   flex: 1;
   overflow: hidden;
+  position: relative;
 }
 
 .dash-sidebar {
@@ -3092,6 +3093,8 @@ h1, h2, h3, h4 {
   flex-direction: column;
   gap: 10px;
   flex: 1;
+  position: relative;
+  overflow: hidden;
 }
 
 .ecom-nav {
@@ -3182,21 +3185,60 @@ h1, h2, h3, h4 {
   overflow: hidden;
 }
 
-.pos-scan-line {
+/* ============================================================= Realistic Project Mockups Laser Scan Lines */
+.mockup-scan-line,
+.pos-scan-line,
+.dash-scan-line,
+.ecom-scan-line,
+.sandbox-scan-line {
   position: absolute;
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #22c55e, transparent);
-  box-shadow: 0 0 8px #22c55e;
-  animation: scan-move 3s ease-in-out infinite alternate;
   pointer-events: none;
+  z-index: 10;
+  animation: scan-move 3s ease-in-out infinite alternate;
+}
+
+/* Project 01: E-Arsip - Cyan / Electric Blue Laser */
+.dash-scan-line,
+.mockup-scan-line--blue {
+  background: linear-gradient(90deg, transparent 4%, rgba(56, 189, 248, 0.4) 20%, #38bdf8 50%, rgba(56, 189, 248, 0.4) 80%, transparent 96%);
+  box-shadow: 0 0 10px #38bdf8, 0 0 3px #ffffff;
+  animation-duration: 3.2s;
+  animation-delay: 0.2s;
+}
+
+/* Project 02: Raden Madura Distro - Azure / Electric Blue Laser */
+.ecom-scan-line,
+.mockup-scan-line--cyan {
+  background: linear-gradient(90deg, transparent 4%, rgba(96, 165, 250, 0.4) 20%, #60a5fa 50%, rgba(96, 165, 250, 0.4) 80%, transparent 96%);
+  box-shadow: 0 0 10px #60a5fa, 0 0 3px #ffffff;
+  animation-duration: 2.8s;
+  animation-delay: 0.7s;
+}
+
+/* Project 03: Cashier Application - High-tech POS Green Laser */
+.pos-scan-line,
+.mockup-scan-line--green {
+  background: linear-gradient(90deg, transparent 4%, rgba(34, 197, 94, 0.4) 20%, #22c55e 50%, rgba(34, 197, 94, 0.4) 80%, transparent 96%);
+  box-shadow: 0 0 10px #22c55e, 0 0 3px #ffffff;
+  animation-duration: 3s;
+}
+
+/* Project 04: UI Sandbox - Neon Violet / Purple Laser */
+.sandbox-scan-line,
+.mockup-scan-line--purple {
+  background: linear-gradient(90deg, transparent 4%, rgba(192, 132, 252, 0.4) 20%, #c084fc 50%, rgba(192, 132, 252, 0.4) 80%, transparent 96%);
+  box-shadow: 0 0 10px #c084fc, 0 0 3px #ffffff;
+  animation-duration: 3.4s;
+  animation-delay: 1.1s;
 }
 
 @keyframes scan-move {
-  0% { top: 10%; opacity: 0.2; }
-  50% { opacity: 0.8; }
-  100% { top: 90%; opacity: 0.2; }
+  0% { top: 8%; opacity: 0.25; }
+  50% { opacity: 0.95; }
+  100% { top: 92%; opacity: 0.25; }
 }
 
 .pos-left {
@@ -3299,6 +3341,8 @@ h1, h2, h3, h4 {
   flex-direction: column;
   gap: 10px;
   flex: 1;
+  position: relative;
+  overflow: hidden;
 }
 
 .sb-header {
